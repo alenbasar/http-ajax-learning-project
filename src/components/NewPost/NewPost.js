@@ -1,12 +1,23 @@
 import React, { Component } from "react";
-
+import axios from "axios";
 import "./NewPost.css";
 
 class NewPost extends Component {
   state = {
     title: "",
     content: "",
-    author: "Max",
+    author: "Alen",
+  };
+
+  postDataHandler = () => {
+    const data = {
+      title: this.state.title,
+      body: this.state.content,
+      author: this.state.author,
+    };
+    axios.post("/posts", data).then((response) => {
+      console.log(response);
+    });
   };
 
   render() {
@@ -30,10 +41,10 @@ class NewPost extends Component {
           value={this.state.author}
           onChange={(event) => this.setState({ author: event.target.value })}
         >
-          <option value="Max">Alen</option>
-          <option value="Manu">Seto</option>
+          <option value="Alen">Alen</option>
+          <option value="Seto">Seto</option>
         </select>
-        <button>Add Post</button>
+        <button onClick={this.postDataHandler}>Add Post</button>
       </div>
     );
   }
