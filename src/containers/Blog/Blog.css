@@ -1,9 +1,14 @@
+.Blog {
+  background-color: rgb(224, 224, 224);
+}
+
 .Blog ul {
   list-style: none;
   margin: 0;
   padding: 0;
   width: 100%;
   text-align: center;
+  background-color: rgb(175, 171, 171);
 }
 
 .Blog li {
