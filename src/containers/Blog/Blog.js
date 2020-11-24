@@ -1,67 +1,34 @@
 import React, { Component } from "react";
-//import axios from "axios";
-import axios from "../../axios";
-import Post from "../../components/Post/Post";
-import FullPost from "../../components/FullPost/FullPost";
-import NewPost from "../../components/NewPost/NewPost";
+import { Route, Link } from "react-router-dom";
 import "./Blog.css";
+import Posts from "./Posts/Posts";
+import NewPost from "./NewPost/NewPost";
 
 class Blog extends Component {
-  state = {
-    posts: [],
-    selectedPostID: null,
-    error: false,
-  };
-
-  componentDidMount() {
-    axios
-      .get("/posts")
-      .then((response) => {
-        const posts = response.data.slice(0, 4);
-        const updatePosts = posts.map((post) => {
-          return {
-            ...post,
-            author: "Alen",
-          };
-        });
-        this.setState({ posts: updatePosts });
-        //console.log(response);
-      })
-      .catch((error) => {
-        //console.log(error);
-        this.setState({ error: true });
-      });
-  }
-  postSelectedHandler = (id) => {
-    this.setState({ selectedPostID: id });
-  };
-
   render() {
-    let posts = <p style={{ textAlign: "center" }}>Something went wrong</p>;
-    if (!this.state.error) {
-      posts = this.state.posts.map((post) => {
-        return (
-          <Post
-            title={post.title}
-            key={post.id}
-            author={post.author}
-            clicked={() => {
-              this.postSelectedHandler(post.id);
-            }}
-          />
-        );
-      });
-    }
-
     return (
-      <div>
-        <section className="Posts">{posts}</section>
-        <section>
-          <FullPost id={this.state.selectedPostID} />
-        </section>
-        <section>
-          <NewPost />
-        </section>
+      <div className="Blog">
+        <header>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link
+                to={{
+                  pathname: "/new-post",
+                  hash: "#submit",
+                  search: "?quick-submit=true",
+                }}
+              >
+                New Post
+              </Link>
+            </li>
+          </ul>
+        </header>
+        {/* <Route path="/" exact render={() => <h1>Home</h1>} /> */}
+        <Route path="/" exact component={Posts} />
+        <Route path="/new-post" component={NewPost} />
       </div>
     );
   }
