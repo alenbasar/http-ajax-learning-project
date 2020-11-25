@@ -1,5 +1,5 @@
 .Blog {
-  background-color: rgb(224, 224, 224);
+  background-color: rgb(223, 245, 253);
 }
 
 .Blog ul {
@@ -8,7 +8,7 @@
   padding: 0;
   width: 100%;
   text-align: center;
-  background-color: rgb(175, 171, 171);
+  background-color: rgb(242, 253, 252);
 }
 
 .Blog li {
@@ -21,7 +21,11 @@
   color: black;
 }
 
-.Blog a:hover,
-.Blog a:active {
+.Blog a:hover {
+  color: rgb(247, 215, 112);
+}
+
+.Blog a:active,
+.Blog a.active {
   color: orange;
 }
